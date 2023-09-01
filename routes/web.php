@@ -3,6 +3,7 @@
 use App\Livewire\Approvals;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Products;
+use App\Http\Controllers\SendNotifyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,4 +31,6 @@ Route::middleware([
 
     Route::get('/products', Products::class)->name('products');
     Route::get('/approvals', Approvals::class)->name('approvals');
+
+    Route::get('sendnotify', [SendNotifyController::class, 'index']);
 });

@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
     {
         $users = [
             'Admin' => 'admin@example.com',
-            'TeamLeader' => 'teamleader1@example.com',
+            'TeamLeader' => 'frrojasr@gmail.com',
             'Editor' => 'editor1@example.com',
             'Viewer' => 'viewer1@example.com',
         ];

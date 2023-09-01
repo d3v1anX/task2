@@ -10,6 +10,9 @@ use Cjmellor\Approval\Models\Approval;
 use App\Livewire\Approvals as ApprovalLW;
 use Livewire\Attributes\On;
 
+use App\Models\User;
+use App\Notifications\NewUpdateProduct;
+
 class Products extends Component
 {
     public $products;
@@ -106,8 +109,14 @@ class Products extends Component
                 'product_group_id'=>$this->product_group_id
             ])->save();
 
-           // $this->dispatch('NewUpdateProduct');
             $this->dispatch('NewUpdateProduct')->to(ApprovalLW::class);
+
+            $teamleaders = User::whereHas("roles", function($q){ $q->where("name", "TeamLeader"); })->get();
+  
+            // Notification::sendNow($teamleaders, new NewUpdateProduct());
+             foreach($teamleaders as $user){
+             $user->notify(new NewUpdateProduct);
+             }
 
             if (Approval::where('approvalable_id',$this->id)->pending()->count()> 0){
 
