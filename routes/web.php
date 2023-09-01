@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Approvals;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Products;
 
@@ -15,7 +16,7 @@ use App\Livewire\Products;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/products');
 });
 
 Route::middleware([
@@ -28,4 +29,5 @@ Route::middleware([
     })->name('dashboard');
 
     Route::get('/products', Products::class)->name('products');
+    Route::get('/approvals', Approvals::class)->name('approvals');
 });

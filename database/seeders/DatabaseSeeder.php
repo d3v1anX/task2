@@ -27,6 +27,8 @@ class DatabaseSeeder extends Seeder
          Permission::create(['name' => 'product-edit']);
          Permission::create(['name' => 'product-delete']);
 
+         Permission::create(['name' => 'approval']);
+
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',

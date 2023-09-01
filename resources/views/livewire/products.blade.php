@@ -2,6 +2,8 @@
     <h1 class="text-gray-900">PRODUCTS LIST</h1>
 </x-slot>
 
+
+
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
@@ -16,6 +18,10 @@
                 </div>
             @endif
 
+            @if ($isOpen)
+                @include('livewire.edit_products')
+            @endif
+
             <table class="table-fixed w-full">
                 <thead>
                     <tr class="bg-indigo-600 text-white">
@@ -27,7 +33,7 @@
                         <th class="px-4 py-2 w-min">Inventory</th>
                         <th class="px-4 py-2 w-min">Prices</th>
                         @if ($user->can('product-edit'))
-                        <th class="px-4 py-2">Actions</th>
+                            <th class="px-4 py-2">Actions</th>
                         @endif
                     </tr>
                 </thead>
@@ -38,7 +44,7 @@
                             <td class="border px-4 py-2">{{ $product->product_name }}</td>
                             <td class="border px-4 py-2">{{ substr($product->product_description, 0, 10) }}...</td>
                             <td class="border px-4 py-2">{{ $product->sku }}</td>
-                            <td class="border px-4 py-2">{{ $product->group->name}}</td>
+                            <td class="border px-4 py-2">{{ $product->group->name }}</td>
                             <td class="border px-4 py-2 w-min text-center">
 
 
@@ -59,8 +65,10 @@
 
                             <td class="border px-4 py-2 text-center">
                                 @if ($user->can('product-edit'))
-                                    <button wire:click="edit({{ $product->id }})"
-                                        class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4">Edit</button>
+                                    <x-button wire:click="edit({{ $product->id }})"
+                                        class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4">
+                                        Edit
+                                    </x-button>
                                 @endif
                             </td>
                         </tr>

@@ -56,7 +56,8 @@ class UserSeeder extends Seeder
             'product-list',
             'product-create',
             'product-edit',
-            'product-delete'
+            'product-delete',
+            'approval'
         ])->pluck('id', 'id');
         $role->syncPermissions($permissions);
         $user->assignRole([$role->id]);
