@@ -8,6 +8,8 @@ use Cjmellor\Approval\Models\Approval;
 use App\Models\Product;
 use App\Livewire\Products;
 use Livewire\Attributes\On; 
+use App\Models\User;
+use App\Notifications\UpdateProductRejected;
 
 class Approvals extends Component
 {
@@ -55,6 +57,11 @@ class Approvals extends Component
       $product = Product::where('id', $approve->approvalable_id)->update((array) $approve->new_data);
 
         $this->dispatch('productAprovedRejected','approve')->to(Products::class);
+
+        $user_editor = User::where("id", $approve->user_id)->first();
+       
+        $user_editor->notify(new UpdateProductRejected);
+    
 
         session()->flash('message','Product Updated Successfully!!');
        
