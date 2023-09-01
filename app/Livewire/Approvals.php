@@ -18,9 +18,12 @@ class Approvals extends Component
 
     public $user;
     public $isOpen = 0;
-   // protected $listeners = ['NewUpdateProduct' => 'render'];
 
    #[On('NewUpdateProduct')]
+   public function sendTeamleaderNotification(){
+
+   }
+
    public function render()
     {
 
@@ -51,12 +54,29 @@ class Approvals extends Component
 
       $product = Product::where('id', $approve->approvalable_id)->update((array) $approve->new_data);
 
-        $this->dispatch('productApproved')->to(Products::class);
+        $this->dispatch('productAprovedRejected','approve')->to(Products::class);
 
         session()->flash('message','Product Updated Successfully!!');
        
         
     }
 
+    public function reject($id)
+    {
+        
+       $reject =  Approval::where('id', $id)->first();
+       $reject->state = 'rejected';
+       $reject->save();
+
+     //  dd((array) $approve->new_data);
+
+     // $product = Product::where('id', $approve->approvalable_id)->update((array) $approve->new_data);
+
+        $this->dispatch('productAprovedRejected','rejected')->to(Products::class);
+
+        session()->flash('message','Update Product Rejected!!');
+
+        
+    }
 
 }

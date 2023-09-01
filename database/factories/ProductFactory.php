@@ -20,7 +20,7 @@ class ProductFactory extends Factory
     {
         return [
             //
-            'product_name' => fake()->name(),
+            'product_name' => fake()->word(),
             'product_description' => fake()->text(100),
             'sku' => random_int(1000000000,9999999999),
             'vendor_id' => Vendor::factory(),

@@ -18,7 +18,7 @@ class WarehouseFactory extends Factory
     {
         return [
             //
-            'warehouse_name' => fake()->name(),
+            'warehouse_name' => fake()->word(),
             'address' => fake()->address(),
             'status' => 1,
         ];

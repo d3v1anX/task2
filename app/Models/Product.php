@@ -8,7 +8,7 @@ use Cjmellor\Approval\Concerns\MustBeApproved;
 
 class Product extends Model
 {
-    use MustBeApproved;
+   use MustBeApproved;
     use HasFactory;
 
     protected $fillable = ['product_name', 'product_description', 'sku', 'vendor_id', 'product_group_id'];

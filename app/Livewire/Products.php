@@ -30,7 +30,10 @@ class Products extends Component
 
    // protected $listeners = ['productAproved' => 'render'];
 
-    #[On('productAproved')] 
+    #[On('productAprovedRejected')] 
+    public function SendEditorNotify(){
+
+    }
     public function render()
     {
         $this->products = Product::all();
@@ -107,6 +110,8 @@ class Products extends Component
             $this->dispatch('NewUpdateProduct')->to(ApprovalLW::class);
 
             if (Approval::where('approvalable_id',$this->id)->pending()->count()> 0){
+
+                Approval::where('approvalable_id',$this->id)->where('state','pending')->update(['user_id'=>Auth::user()->id, 'user_name'=>Auth::user()->name, 'name' =>$this->product_name]);
                 
                 session()->flash('message','Changes were updated pending approval');
             } else {

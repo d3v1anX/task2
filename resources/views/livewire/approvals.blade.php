@@ -22,10 +22,12 @@
                 <thead>
                     <tr class="bg-indigo-600 text-white">
                         <th class="px-4 py-2 text-center w-min">#</th>
-                        <th class="px-4 py-2">Table Name</th>
+                        <th class="px-4 py-2">Table</th>
+                        <th class="px-4 py-2">Name</th>
                         <th class="px-4 py-2">Requested Updates</th>
                         <th class="px-4 py-2">Original Values</th>
-                        <th class="px-4 py-2">Status</th>
+                        
+                        <th class="px-4 py-2">User Requested</th>
                         {{-- @if ($user->can('approvals')) --}}
                             <th class="px-4 py-2">Actions</th>
                         {{-- @endif --}}
@@ -36,22 +38,24 @@
                         <tr>
                             <td class="border text-center px-4 py-2 w-min">{{ $approval->id }}</td>
                             <td class="border px-4 py-2">{{ $approval->approvalable_type }}</td>
+                            <td class="border px-4 py-2">{{ $approval->name }}</td>
                             <td class="border px-4 py-2">{{ json_encode($approval->new_data) }}</td>
                             <td class="border px-4 py-2">{{ json_encode($approval->original_data) }}</td>
 
-                            <td class="border px-4 py-2">{{ $approval->state }}</td>
+                           
+                            <td class="border px-4 py-2">{{ $approval->user_name }}</td>
 
                             <td class="border px-4 py-2 text-center">
-                                {{-- @if ($user->can('approval')) --}}
+                                @if ($user->can('approval'))
                                     <x-button wire:click="approve({{ $approval->id }})"
                                         class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4">
                                         APPROVE
                                     </x-button>
-                                    <x-button wire:click="approve({{ $approval->id }})"
+                                    <x-button wire:click="reject({{ $approval->id }})"
                                         class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4">
                                         REJECT
                                     </x-button>
-                                {{-- @endif --}}
+                                @endif
                             </td>
                         </tr>
                     @endforeach

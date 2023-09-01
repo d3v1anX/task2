@@ -15,12 +15,16 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    
                     <x-nav-link href="{{ route('products') }}" :active="request()->routeIs('products')">
                         {{ __('Products') }}
                     </x-nav-link>
+                    @if (Auth::user()->can('approval'))
                     <x-nav-link href="{{ route('approvals') }}" :active="request()->routeIs('approvals')">
                         {{ __('Approvals') }}
                     </x-nav-link>
+                    @endif
                 </div>
             </div>
 

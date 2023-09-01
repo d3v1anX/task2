@@ -18,7 +18,7 @@ class ProductGroupFactory extends Factory
     {
         return [
             //
-            'name' => fake()->name(),
+            'name' => fake()->word(),
             'description' => fake()->text(100),
             'status' => 1,
             
